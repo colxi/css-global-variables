@@ -1,0 +1,27 @@
+ <body>
+  <style>
+    :root {
+      --main-color: #452343; /* default */
+      --textSize: 12; /* default */
+    }
+    .demo{
+      width: 100%;
+      height: 50px;
+      background-color: var(--main-color);
+    }
+  </style>
+
+  Pick a color:
+  <input type="color" value="#ff4545">
+  <div class="demo"></div>
+  <script>
+    let css = import('./css-var.js').then( x=>console.log(x)  )
+
+     var input = document.querySelector('input');
+     input.addEventListener('change', function(){
+        cssVar['--main-color']= input.value;
+     })
+
+
+  </script>
+</body>

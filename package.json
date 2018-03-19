@@ -1,0 +1,19 @@
+{
+  "author": "colxi <colxi.kl@gmail.com> (http://www.colxi.info)",
+  "version": "0.1.0",
+  "keywords": [
+    "css variable",
+    "css vars",
+    "css templating",
+    "cssvar"
+  ],
+  "name": "css-var",
+  "description": "cssVar allows easy manipulation top level (:root) CSS variables",
+  "main": "css-var.js",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colxi/css-var.git"
+  }
+}
