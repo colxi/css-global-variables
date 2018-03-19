@@ -98,7 +98,7 @@ div{
 ```
 
 demo.js
-```javscript
+```javascript
 // on document ready...
 document.addEventListener('DOMContentLoaded', function(){
     // ...attach click event to te body
