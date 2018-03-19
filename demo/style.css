@@ -1,0 +1,29 @@
+/*
+* @Author: colxi
+* @Date:   2018-03-19 15:11:52
+* @Last Modified by:   colxi
+* @Last Modified time: 2018-03-19 15:22:26
+*/
+:root{
+    /* declaration of some global variables */
+    --primaryColor : #F2A2BB;
+    --textSize : 12;
+}
+
+body{
+    /* Body background color will be specifed by the CSS variable --primaryColor */
+    background-color: var(--primaryColor);
+    /* Some extra styling ... */
+    text-align:center;
+    margin: 0;
+    height: 100%;
+    cursor:pointer;
+}
+
+div{
+	/* Trick : Multiplying * 1px the value of th var, will add the needd "px" sufix */
+    font-size: calc( var(--textSize) * 1px );
+    /* Some extra styling ... */
+	position:relative;
+	top:50%;
+}
