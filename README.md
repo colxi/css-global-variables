@@ -66,29 +66,50 @@ console.log( cssVar['--myVariable'] );
 ```
 
 ### Example
-You can see the live example here
+The fol,owing example, randomizes the background color, and the font size, each time receives click
+You can see the full [live example in action, here](https://colxi.github.io/css-var/demo/)
 
 style.css
 ```css
 :root{
-    /* declaration of some global variables */
+    /* declaration of some CSS3 global variables */
     --primaryColor : #F2A2BB;
-    --SecondaryColor : blue;
     --textSize : 12;
 }
+
 body{
-    /* Body background color will be specifed by the CSS variable --primaryColor */
-    background-color: var(--primarColor);
-    /* tezt color is set by --secondaryColor */ 
-    color: var(--secondaryColor);
-    /* Trick : Multiplying * 1px the value of th var, will add the sufix "px" automatically
-    font-size: calc( var(--textSize) * 1px );
+    /* Body background color will be setted by the CSS variable --primaryColor */
+    background-color: var(--primaryColor);
+    /* Some extra styling ... */
+    text-align:center;
+    margin: 0;
+    height: 100%;
+    cursor:pointer;
 }
+
+div{
+    /* The size of the text is setted by --textSize */
+	   /* Trick : Multiplying * 1px the value of th var, will add the needd "px" sufix */
+    font-size: calc( var(--textSize) * 1px );
+    /* Some extra styling ... */
+	   position:relative;
+	   top:50%;
+}
+
 ```
 
 demo.js
 ```javscript
-
+// on document ready...
+document.addEventListener('DOMContentLoaded', function(){
+	   // ...attach click event to te body
+	   document.body.addEventListener('click', function(){
+		      /* Generate and assign random color */
+		      cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
+	     	 /* Generate and assign random size, betwen 15 and 45 */
+		      cssVar.textSize = Math.floor( Math.random()*30 + 15 );
+	  })
+} , false);
 ```
  
 index.html
@@ -96,11 +117,11 @@ index.html
 <html>
     <head>
          <script src="https://cdn.rawgit.com/colxi/css-var/master/css-var.js"></script>
-         <link rel="stylesheet" href="style.css" />
-         <script src="demo.js"></script>
+         <link rel="stylesheet" href="./style.css" />
+         <script src="./demo.js"></script>
     </head>
      <body>
-        <button id="randomize">Randomize!</button>
+        <div>Randomize!</div>
      </body>
- <html>
+ <html> 
  ```
