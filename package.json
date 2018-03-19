@@ -2,13 +2,15 @@
   "author": "colxi <colxi.kl@gmail.com> (http://www.colxi.info)",
   "version": "0.1.0",
   "keywords": [
+    "cssvar",
     "css variable",
     "css vars",
+    "templating",
     "css templating",
-    "cssvar"
+    "html templating"
   ],
   "name": "css-var",
-  "description": "cssVar allows easy manipulation top level (:root) CSS variables",
+  "description": "cssVar allows easy manipulation of Global CSS variables",
   "main": "css-var.js",
   "license": "GPL-3.0",
   "dependencies": {},
