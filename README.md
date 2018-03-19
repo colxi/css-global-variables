@@ -41,7 +41,7 @@ import("./css-var.js")
 
 Once he library is attached/imported with any of the previous methods, the global Object `cssVar` will be available, and ready for usage!
 
-### Usage
+## Usage
 The `cssVar` Object behaves as a regular Js Object.  Any regular Object operation can be performed in `cssvar`. We are going to focus here, only in the most usefull and interesting ones : **enumeration , getters , setters**
 
 **Enumrate** all declared CSS3 global variables iterating the cssVar Object :
@@ -66,8 +66,8 @@ console.log( cssVar['--myVariable'] );
 ```
 
 ### Example
-The fol,owing example, randomizes the background color, and the font size, each time receives click
-You can see the full [live example in action, here](https://colxi.github.io/css-var/demo/)
+The following example (available in ./demo), randomizes the background color, and the font size, each time recieves a click.
+You can test it [here](https://colxi.github.io/css-var/demo/)
 
 style.css
 ```css
@@ -89,26 +89,25 @@ body{
 
 div{
     /* The size of the text is setted by --textSize */
-	   /* Trick : Multiplying * 1px the value of th var, will add the needd "px" sufix */
+    /* Trick : Multiplying * 1px the value of th var, will add the needd "px" sufix */
     font-size: calc( var(--textSize) * 1px );
     /* Some extra styling ... */
-	   position:relative;
-	   top:50%;
+    position: relative;
+    top: 50%;
 }
-
 ```
 
 demo.js
 ```javscript
 // on document ready...
 document.addEventListener('DOMContentLoaded', function(){
-	   // ...attach click event to te body
-	   document.body.addEventListener('click', function(){
-		      /* Generate and assign random color */
-		      cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
-	     	 /* Generate and assign random size, betwen 15 and 45 */
-		      cssVar.textSize = Math.floor( Math.random()*30 + 15 );
-	  })
+    // ...attach click event to te body
+    document.body.addEventListener('click', function(){
+        /* Generate and assign random color */
+	cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
+	/* Generate and assign random size, betwen 15 and 45 */
+	cssVar.textSize = Math.floor( Math.random()*30 + 15 );
+    })
 } , false);
 ```
  
