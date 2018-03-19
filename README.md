@@ -1,8 +1,7 @@
-# css-var : CSS Variables Manipulation via JS
 ![](https://img.shields.io/badge/cdn-cdn.rawgit-green.svg)
-![](https://img.shields.io/badge/poweredBy-jQuery-blue.svg)
-![](https://img.shields.io/badge/Hubspot-on%20Steroids-orange.svg)
 
+
+# css-var : CSS3 Variables Manipulation with JS (ES6)
 `cssVar` allows easy manipulation (get & set) of your **GLOBAL (:root) CSS3 variables**, simplifing the templating related scenarios & tasks, providing a natural interface:
 
 ```javascript
@@ -15,7 +14,7 @@ cssVar.myVariableName = "myVariableNewValue";
 - **The `--` variable name prefix , is not required** when setting or getting variables using `cssVar`. It is included automatically by the library when not provided. This automatization provides a more **natural & fast coding**. (However is still required on the CSS realm)
 - Automagically **detects any new CSS attachment** in the document, performed after the initial load.
 
-### Limitations :
+## Limitations :
 - `cssVar` only operates with Global (:root) CSS Variables. Any definition/overewritting done inside another CSS selector will not be detected, and could affect the proper behavior of cssVar.
 - When `cssVar` library is loaded into the document, can generate a small delay, if the document has extensive CSS definitions.
 
@@ -41,35 +40,66 @@ import("./css-var.js")
 
 Once he library is attached/imported with any of the previous methods, the global Object `cssVar` will be available, and ready for usage!
 
-### Examples
+### Usage
+The `cssVar` Object behaves as a regular Js Object.  Any regular Object operation can be performed in `cssvar`. We are going to focus here, only in the most usefull and interesting ones : **enumeration , getters , setters**
 
+**Enumrate** all declared CSS3 global variables iterating the cssVar Object :
+```javascript
+for(let v in cssVar){
+    if ( cssVar.hasOwnProperty(v) ) console.log(v);
+}
+```
+**Set** a new value to a  CSS3 Global variabe :
+```javascript
+/* The following assigmenents behave equally, and are all valid */
+cssVar.myVariable = 'newValue';
+cssVar['myVariable'] = 'newValue';
+cssVar['--myVariable'] = 'newValue';
+```
+**Get** the value of a CSS3 Global variabe :
+```javascript
+/* The following value retrievals behave equally, and are all valid */
+console.log( cssVar.myVariable );
+console.log( cssVar['myVariable'] );
+console.log( cssVar['--myVariable'] );
+```
+
+### Example
 You can see the live example here
 
 style.css
 ```css
 :root{
-    /* declaration of two global variables */
-    --main-color : #F2A2BB;
+    /* declaration of some global variables */
+    --primaryColor : #F2A2BB;
+    --SecondaryColor : blue;
     --textSize : 12;
 }
 body{
-    /* Body background color will be specifed by the CSS variable --main-color */
-    background-color: var(--main-color);
+    /* Body background color will be specifed by the CSS variable --primaryColor */
+    background-color: var(--primarColor);
+    /* tezt color is set by --secondaryColor */ 
+    color: var(--secondaryColor);
     /* Trick : Multiplying * 1px the value of th var, will add the sufix "px" automatically
     font-size: calc( var(--textSize) * 1px );
 }
 ```
 
+demo.js
+```javscript
+
+```
+ 
 index.html
 ```html
 <html>
     <head>
-         <script src="https://cdn.rawgit.com/colxi/css-var/master/css-var.js">
+         <script src="https://cdn.rawgit.com/colxi/css-var/master/css-var.js"></script>
          <link rel="stylesheet" href="style.css" />
-         <script src="demo.js">
+         <script src="demo.js"></script>
     </head>
      <body>
-        <button>Randomize!</button>
+        <button id="randomize">Randomize!</button>
      </body>
  <html>
  ```
