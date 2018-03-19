@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/cdn-cdn.rawgit-green.svg)
-
+![](https://img.shields.io/badge/Javascript-ES6-orange.svg)
+![](https://img.shields.io/badge/markup-CSS3-blue.svg)
 
 # css-var : CSS3 Variables Manipulation with JS (ES6)
 `cssVar` allows easy manipulation (get & set) of your **GLOBAL (:root) CSS3 variables**, simplifing the templating related scenarios & tasks, providing a natural interface:
