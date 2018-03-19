@@ -9,7 +9,7 @@
     "css templating",
     "html templating"
   ],
-  "name": "css-var",
+  "name": "cssvar",
   "description": "cssVar allows easy manipulation of Global CSS variables",
   "main": "css-var.js",
   "license": "GPL-3.0",
