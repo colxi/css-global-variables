@@ -2,13 +2,24 @@
 ![](https://img.shields.io/badge/Javascript-ES6-orange.svg)
 ![](https://img.shields.io/badge/markup-CSS3-blue.svg)
 
-# css-var : CSS3 Variables Manipulation with JS (ES6)
-The `cssVar` helper provides easy manipulation of your **GLOBAL (:root) CSS3 variables**, simplifying the templating related scenarios & tasks, through a natural interface:
+# CSS3 Variables Manipulation with JS (ES6) ( aka css-var )
+The CSSGlobalVariables helper provides an fast manipulation interface for your **GLOBAL (:root) CSS3 variables**, simplifying the templating related scenarios & tasks, through a natural interface:
 
 ```javascript
 // set the CSS global --myVariableName value  to "myVariableNewValue"
+let cssVar = new CSSGlobalVariables();
 cssVar.myVariableName = "myVariableNewValue";
 ```
+
+## Syntax:
+The CSSGlobalVariables() Constructor returns an Object coantaining a **live Collection** of all the CSS global variables, as properties.
+
+> CSSGlobalVariables( [autoPrefix], [filterSelector], [declareGlobal] )
+
+#### Arguments:
+- ´autoPrefix´ : When set to ´true´ allows acces to the CSS variables names without specifing the ´--´ prefix on the name. (Optional. Default:´true´)
+- ´filterSelector´ : Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to ´false´, everything is scanned. (Optional. Default:´false´)
+- ´declareGlobal´ : Declares a root lvel variable (default : '__cssGlobals__'): If set
 
 ## Features:
 - All your CSS global (:root selector) **variables are stored in the cssVar Object as properties**. Any change on them will be instantly reflected into the CSS realm.
@@ -104,9 +115,9 @@ document.addEventListener('DOMContentLoaded', function(){
     // ...attach click event to te body
     document.body.addEventListener('click', function(){
         /* Generate and assign random color */
-	cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
-	/* Generate and assign random size, betwen 15 and 45 */
-	cssVar.textSize = Math.floor( Math.random()*30 + 15 );
+    cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
+    /* Generate and assign random size, betwen 15 and 45 */
+    cssVar.textSize = Math.floor( Math.random()*30 + 15 );
     })
 } , false);
 ```
@@ -119,8 +130,9 @@ index.html
          <link rel="stylesheet" href="./style.css" />
          <script src="./demo.js"></script>
     </head>
-     <body>
+    <body>
         <div>Randomize!</div>
-     </body>
+    </body>
  <html>
  ```
+

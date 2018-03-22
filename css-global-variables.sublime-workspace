@@ -1,0 +1,1549 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"user",
+				"userConfig〔variable〕"
+			],
+			[
+				"dec",
+				"declareGlobal〔variable〕"
+			],
+			[
+				"has",
+				"hasOwnProperty"
+			],
+			[
+				"buil",
+				"buildCache"
+			],
+			[
+				"var",
+				"variable〔argument〕"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"sp",
+				"sprite_bit"
+			],
+			[
+				"M",
+				"Memory"
+			],
+			[
+				"uint",
+				"uint8_t"
+			],
+			[
+				"ui",
+				"uint8_t"
+			],
+			[
+				"GUI",
+				"GUIRefresh"
+			],
+			[
+				"GUIRefre",
+				"GUIRefreshInterval"
+			],
+			[
+				"emu",
+				"emulationReset〔function〕"
+			],
+			[
+				"Sta",
+				"StackOffset"
+			],
+			[
+				"tim",
+				"time_in_micros2"
+			],
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"Mem",
+				"memoryDump〔function〕"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"TI",
+				"TIMEZONE_OFFSET"
+			],
+			[
+				"sub",
+				"substring"
+			],
+			[
+				"strin",
+				"stringify"
+			],
+			[
+				"use",
+				"users"
+			],
+			[
+				"projec",
+				"projectsIgnored"
+			],
+			[
+				"get",
+				"getCropCalendar"
+			],
+			[
+				"EVENT",
+				"EVENT_DAY_START〔variable〕"
+			],
+			[
+				"calenda",
+				"calendarToday〔variable〕"
+			],
+			[
+				"_war",
+				"__WATCHER__"
+			],
+			[
+				"_re",
+				"_request_timeout〔variable〕"
+			],
+			[
+				"respons",
+				"response_parts"
+			],
+			[
+				"proce",
+				"processQueue"
+			],
+			[
+				"proc",
+				"processQueue"
+			],
+			[
+				"st",
+				"style\tTag"
+			],
+			[
+				"service",
+				"service_mode"
+			],
+			[
+				"print",
+				"printEnter"
+			],
+			[
+				"set",
+				"setCursor"
+			],
+			[
+				"next",
+				"nextBit"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "css-var.js",
+			"settings":
+			{
+				"buffer_size": 10198,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "demo/demo.js",
+			"settings":
+			{
+				"buffer_size": 434,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "demo/index.html",
+			"settings":
+			{
+				"buffer_size": 232,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 552.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"package",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package insta",
+				"Package Control: Install Package"
+			],
+			[
+				"hea",
+				"FileHeader: Add Header"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"repl no",
+				"SublimeREPL: Node"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remove packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"jsli",
+				"JSLint"
+			],
+			[
+				"node",
+				"SublimeREPL: Node"
+			],
+			[
+				"task",
+				"Tasks: New"
+			],
+			[
+				"line",
+				"Line Endings Unify"
+			],
+			[
+				"sublimerepl no",
+				"SublimeREPL: Node"
+			],
+			[
+				"glue",
+				"Glue - Launch"
+			],
+			[
+				"packages",
+				"Package Control: List Packages"
+			],
+			[
+				"prett",
+				"HTMLPrettify"
+			],
+			[
+				"pret",
+				"HTMLPrettify"
+			],
+			[
+				"html",
+				"HTMLPrettify"
+			],
+			[
+				"js",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"reset",
+				"PackageSync: Backup/Restore - Restore Packages From Folder"
+			],
+			[
+				"depende",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"packagesync",
+				"PackageSync: Backup/Restore - Restore Packages From Zip (Recommended)"
+			],
+			[
+				"package sync",
+				"Package Syncing: Enable Syncing"
+			]
+		],
+		"width": 726.0
+	},
+	"console":
+	{
+		"height": 394.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Users/colxi/projects/code/css-var",
+		"/D/Users/colxi/projects/code/css-var/demo"
+	],
+	"file_history":
+	[
+		"/D/Users/colxi/projects/code/chip8-wasm/src/gui.js",
+		"/D/Users/colxi/projects/code/chip8-wasm/src/index.html",
+		"/D/Users/colxi/projects/code/chip8-wasm/.eslintrc.json",
+		"/D/Users/colxi/projects/code/css-var/demo/style.css",
+		"/D/Users/colxi/projects/code/css-var/demo/demo.js",
+		"/C/Users/colxi/AppData/Local/Temp/7zO4B94FC41/cnvyr.css",
+		"/D/Users/colxi/projects/code/css-var/css-var.js",
+		"/D/Users/colxi/projects/code/css-var/README.md",
+		"/D/Users/colxi/projects/code/css-var/demo/index.html",
+		"/D/Users/colxi/projects/code/css-var/package.json",
+		"/D/Users/colxi/projects/code/css-var/index.html",
+		"/D/Users/colxi/projects/code/_css-var/README.md",
+		"/C/Users/colxi/Desktop/chip/chip8-master (3)/chip8-master/chip8.c",
+		"/C/Users/colxi/Desktop/chip/chip8-master (1)/chip8-master/chip8.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/src/chip8.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/TEST.chip8",
+		"/D/Users/colxi/projects/code/is-port-available/index.js",
+		"/C/Users/colxi/Desktop/chip/Chip8-master (5)/Chip8-master/src/graphics.c",
+		"/C/Users/colxi/Desktop/chip/chip8-master/chip8.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/build.bat",
+		"/D/Users/colxi/projects/code/chip8-wasm/index.html",
+		"/D/Users/colxi/projects/code/chip8/doc/chip8-0.2.0/src/cpu.h",
+		"/D/Users/colxi/projects/code/chip8/doc/chip8-0.2.0/src/cpu.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/styles.css",
+		"/D/Users/colxi/projects/code/chip8-wasm/main.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/chip8.js",
+		"/D/Users/colxi/projects/code/incrop/crop-manager/.eslintrc.json",
+		"/D/Users/colxi/projects/code/midi-parser-js/.jshintrc",
+		"/D/Users/colxi/projects/code/incrop/crop-client/.eslintrc.json",
+		"/D/Users/colxi/projects/code/chip8/doc/chip8-0.2.0/src/chip8.c",
+		"/D/Users/colxi/projects/code/chip8/doc/chip8-0.2.0/src/libsdl.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/_utils.c",
+		"/D/Users/colxi/projects/code/chip8-wasm/main.js",
+		"/D/Users/colxi/projects/code/chip8-wasm/package-lock.json",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.22/site/source/docs/api_reference/emscripten.h.rst",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/emscripten/emscripten.h",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/src/hello_world.js",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/lib/html5/dom_pk_codes.c",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/lib/pthread/library_pthread.c",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/lib/build_cxx_natively.sh",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/SDL/SDL_timer.h",
+		"/D/Users/colxi/projects/code/wasm-intro/3-calling-js-from-wasm/program.c",
+		"/D/Users/colxi/projects/code/wasm-intro/3-calling-js-from-wasm/test.html",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/libc/time.h",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/compat/time.h",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/libcxx/experimental/chrono",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/libc/stdint.h",
+		"/D/Program Files (x86)/emsdk/emscripten/1.37.35/system/include/libc/wait.h",
+		"/D/Users/colxi/projects/code/pull-to-refresh-chrome-extension/content_script.js",
+		"/D/Users/colxi/projects/code/chip8-wasm/make.bat",
+		"/C/Users/colxi/Desktop/Thimbleweed.Park/reloaded.nfo",
+		"/D/Users/colxi/projects/code/pull-to-refresh-chrome-extension/manifest.json",
+		"/D/Users/colxi/projects/code/pull-to-refresh-chrome-extension/test..html",
+		"/D/Users/colxi/projects/code/pull-to-refresh-chrome-extension/css/styles.css",
+		"/D/Users/colxi/projects/code/chip8-wasm/lib/perfect-scrollbar/dist/perfect-scrollbar.esm.js",
+		"/D/Users/colxi/projects/code/chip8-wasm/README.md",
+		"/C/Users/colxi/AppData/Roaming/Sublime Text 3/Packages/Color Highlighter/ColorHighlighter.sublime-settings",
+		"/C/Users/colxi/AppData/Roaming/Sublime Text 3/Packages/User/ColorHighlighter.sublime-settings",
+		"/D/Users/colxi/Downloads/chrome-extensions-examples-master/fontSettings/css/widgets.css",
+		"/D/Users/colxi/Downloads/O'Reilly Ultimate Collection/O'Reilly - CSS Cookbook.chm",
+		"/C/Users/colxi.kl/Desktop/servieduca_hours",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/hubspot_forms.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/prelanding.php",
+		"/C/Users/colxi.kl/Projects/code/asmalljob-dashboard/index.js",
+		"/F/Videos/desktop.ini",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/header.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/header 2.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/wp-config 2.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/wp-config.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/functions.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/index.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/index.html",
+		"/C/Users/colxi.kl/Projects/code/midi-parser-js/src/examples/midi-parser.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-includes/rivets/rivets-datepicker.js",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/style.css",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/template-home.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/functions 2.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/header 3.php",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/php 2.ini",
+		"/C/Users/colxi.kl/Downloads/error_log",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/php.ini",
+		"/C/Users/colxi.kl/Desktop/desktop.ini",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/readme.txt",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-adapters/app.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-models/plans.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-client.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-adapters/crops.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-views/crops/form.html",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/pg-styles.css",
+		"/C/Users/colxi.kl/Projects/code/asmalljob-dashboard/start.sh",
+		"/C/Users/colxi.kl/AppData/Local/Temp/fz3temp-2/__pg-xml-to-json.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/_sass/partials/_tooltip - copia.scss",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/_sass/partials/_layout.scss",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/_sass/partials/_form.scss",
+		"/C/Users/colxi.kl/Projects/code/torrentWatch/build/html/views/feeds/form.html",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-includes/rivets/rivets-import.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-includes/rivets/rivets-stdlib.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-models/crops.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/_sass/partials/_columnization.scss",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-styles/_sass/pg-styles.scss",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-plugins/pg-dom-utils.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-server/pg-server.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-config-default.json",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-plugins/http.es6",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-plugins/parseXML.js",
+		"/C/Users/colxi.kl/Desktop/Spoty.txt",
+		"//COLXI-CROP/Projects/incrop/crop-client/app_modules/app-log.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/DOM/element.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/pg-dom-utils.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/http.es6",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/DOM/get.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-config.json",
+		"//COLXI-CROP/Projects/incrop/crop-client/main.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/modules/form-validation.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-favicon/pg-favicon.html",
+		"//COLXI-CROP/Projects/incrop/crop-manager/index.html",
+		"//COLXI-CROP/Projects/incrop/crop-manager/start-server.sh",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-default-config.json",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/favicon/browserconfig.xml",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/favicon/manifest.json",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/imgs/favicon/browserconfig.xml",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/imgs/favicon/manifest.json",
+		"/C/Users/colxi.kl/Projects/code/is-port-available/index.js",
+		"/C/Users/colxi.kl/Projects/code/is-port-available/package.json",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/FORM/validation.js",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-views/crops/list.html",
+		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/JSON/parseXML.js",
+		"/C/Users/colxi.kl/Desktop/New Super Mario Bros/Léeme.txt"
+	],
+	"find":
+	{
+		"height": 85.0
+	},
+	"find_in_files":
+	{
+		"height": 243.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"prefixVariableName",
+			"todo",
+			"to do",
+			"todo",
+			"requirePrefix",
+			"updateCache",
+			"__varsCache__",
+			"_cache",
+			"cacheProxy",
+			"_cssVar",
+			"_cssVar.cache",
+			"_cssVar.updateCache",
+			"_cache",
+			"setted",
+			"automa",
+			"*",
+			"cache",
+			"hasCache",
+			"updateCache",
+			"build",
+			"rootVars",
+			"scre",
+			"memoryByteLo",
+			"memoryByteHi",
+			"draw_sprite",
+			"\"",
+			"asyn",
+			"STACK_OFFSET",
+			"VIDEO_OFFSET",
+			"for",
+			"ROMimage",
+			"ROMímage",
+			"ROM",
+			"rom",
+			"RomImage",
+			"esm",
+			"print",
+			"console",
+			"app.config",
+			"ignoreUnknownInstructions",
+			"set",
+			"haltOnUnknownInstructions",
+			"+toHex",
+			"disasembly",
+			"tick",
+			"ROM",
+			"app.memory[",
+			"app.memo",
+			"memo",
+			"pointe",
+			"poin",
+			"__WASM_MEMORY_REGISTERS_OFFSET__",
+			"rom",
+			"memorySize",
+			"romImage",
+			"app.memo",
+			"stack",
+			"_getStackPointer",
+			"_getMemoryPointer",
+			"memorySize",
+			"statu",
+			"__MEMORY_WASM__",
+			"app.memory[",
+			"app.memory",
+			"v2",
+			"app.Pointer",
+			"app.Pointers",
+			"app.Poin",
+			"__GUIRefreshInterval__",
+			"app.Po",
+			"currentPC",
+			".currentPC",
+			".currentPCç",
+			".currentPC",
+			"app.Pointer",
+			"setPC",
+			"sp",
+			"currentInstruction",
+			"currentPC",
+			"currentInstruction",
+			"GUIElements",
+			"instructionsAutoscroll",
+			"init",
+			"clearr",
+			"clearm",
+			"registersDump",
+			"Status",
+			"resumeExecution",
+			"toHex",
+			"tohex",
+			"blu",
+			"STACK_SIZE",
+			"MEM_SIZE",
+			"MEM_ROM_OFFSET",
+			"pre",
+			"stac",
+			"opa",
+			"groupInstructions",
+			"runn",
+			"addoninit",
+			"__ATINIT__",
+			"init",
+			"200",
+			"tech",
+			"performa",
+			"memc",
+			"nnn",
+			"Status",
+			"stat",
+			"env",
+			"main",
+			"missing function:",
+			"fixImports",
+			"doNativeWasm",
+			"env",
+			"info",
+			"WebAssembly.instantiate",
+			"_console",
+			"console",
+			"__ATMAIN__",
+			"__ATINIT__",
+			"event",
+			"__ATINIT__",
+			"runtimeInitialized",
+			"ready",
+			"exports",
+			"instantiateArrayBuffer",
+			"WebAssembly.instantiate"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"normalizeVariableName",
+			"updateVarsCache",
+			"__varsCache__",
+			"varsCacheProxy",
+			"cacheProxy",
+			"updateCache",
+			"",
+			"varsCache",
+			"screenByteLo",
+			"screenByteHi",
+			"'",
+			"MEM_STACK_OFFSET",
+			"app.Config",
+			"+app.toHex",
+			"__WASM_MEMORY__[",
+			"__REGISTERS_OFFSET__",
+			"__MEMORY_WASM__[",
+			"__POINTERS__",
+			"__GUI_REFRESH_INTERVAL__",
+			"currentPC",
+			"GUI",
+			"reg_V",
+			"app.",
+			"Machine",
+			"registersBlockPointer"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "css-var.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10198,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1667,
+								1667
+							]
+						],
+						"settings":
+						{
+							"SL.14.region_keys":
+							[
+								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
+								"SL.eslint.Gutter.region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter.dot",
+								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32",
+								"sublime_linter.protected_regions",
+								"SL.eslint.Highlights.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|32"
+							],
+							"SL.17.region_keys":
+							[
+								"sublime_linter.protected_regions",
+								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
+								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32"
+							],
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										10190,
+										10191
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1639,
+										1640
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										10190,
+										10191
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1639,
+										1640
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"bs_sintax": "javascript (babel)",
+							"buffer_scroll_name": "99065a82",
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								3,
+								19,
+								12,
+								25,
+								34,
+								5,
+								4,
+								191,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"spell_check": false,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1392.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "demo/demo.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								434,
+								434
+							]
+						],
+						"settings":
+						{
+							"SL.17.region_keys":
+							[
+								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
+								"SL.eslint.Gutter.region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter.dot",
+								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32",
+								"sublime_linter.protected_regions",
+								"SL.eslint.Highlights.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|32"
+							],
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										438,
+										439
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										80,
+										81
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"bs_sintax": "javascript (babel)",
+							"buffer_scroll_name": "42c8be92",
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								3,
+								19,
+								15,
+								22,
+								34,
+								2,
+								22,
+								53,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"spell_check": false,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "demo/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"SL.15.region_keys":
+							[
+							],
+							"SL.18.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										66,
+										67
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										54,
+										55
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										105,
+										106
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										91,
+										92
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"bs_sintax": "html",
+							"buffer_scroll_name": "e8379c4a",
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								3,
+								19,
+								15,
+								24,
+								37,
+								12,
+								45,
+								254,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"spell_check": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 41.0
+	},
+	"input":
+	{
+		"height": 229.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 116.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 198.0
+	},
+	"output.tooltips":
+	{
+		"height": 122.0
+	},
+	"pinned_build_system": "",
+	"project": "css-global-variables.sublime-project",
+	"replace":
+	{
+		"height": 164.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 1
+	}
+}
