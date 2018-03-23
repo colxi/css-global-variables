@@ -14,18 +14,22 @@ cssVar.myVariableName = "myVariableNewValue";
 ## Syntax:
 
 > new CSSGlobalVariables( [autoPrefix], [filterSelector], [declareGlobal] )
+
 > new CSSGlobalVariables( [configObject] )
 
 
 #### Parameters:
-**`autoPrefix`**
-    When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (Boolean. Optional. Default:`true`)
-**`filterSelector`**
-    Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (String|false. Optional. Default:`false`)
-**`declareGlobal`**
-    Declares a window global variable. Meant for debugging purposes. (String|false. Optional. Default : '__cssGlobals__')
-**`configObject`**
-    An Object containing any of the previous parameters as properties.
+* **`autoPrefix`** :
+When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (Boolean. Optional. Default:`true`)
+    
+* **`filterSelector`** :
+Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (String|false. Optional. Default:`false`)
+    
+* **`declareGlobal`** :
+Declares a window global variable. Meant for debugging purposes. (String|false. Optional. Default : '__cssGlobals__')
+    
+* **`configObject`** :
+An Object containing any of the previous parameters as properties.
 
 #### Return value:
 The CSSGlobalVariables() Constructor returns an Proxy Object coantaining a **live Collection** of all the CSS global variables, as properties.
@@ -98,6 +102,8 @@ console.log( cssVar.myVariable );
 console.log( cssVar['myVariable'] );
 console.log( cssVar['--myVariable'] );
 ```
+
+---
 
 ### Example
 The following example (available in ./demo), randomizes the background color, and the font size, each time receives a click.
