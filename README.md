@@ -56,7 +56,7 @@ You can choose betwen any of the following available options/distribution channe
 
 2- Use the online delivery network
  ```html
-<script src="https://cdn.rawgit.com/colxi/css-var/master/src/css-global-variables.js"></script>
+<script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.js"></script>
 ```
 
 3- Install it using npm and import it. (unsafe! Not available in all browsers)
