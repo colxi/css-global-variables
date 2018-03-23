@@ -1,49 +1,21 @@
 /*
 *
+* @Package: css-global-variables (CSSGlobalVariables)
+* @Url: https://github.com/colxi/css-global-variables/
 * @Author: colxi
 * @Email: colxi.kl@gmail.com
 * @Date:   2018-03-18 21:32:45
 * @Last Modified by:   colxi
-* @Last Modified time: 2018-03-23 14:22:33
+* @Last Modified time: 2018-03-23 16:09:54
 * @License : GPL-3.0
-
 *
-* @Description : Returns a live collection, for easy manipulation (get & set)  top level (:root)
-* CSS variables, simplifing the CSS based templating.
-*
-* Notes:
-* - The '--' variable name prefix , is not required when setting or getting
-* variables. It will be included automatically when ot provided. This feature
-* provides a more natural  & fast coding.
-* - The first time cssvar object is called, can generate a small delay, if the
-* document has extensive CSS definitions.
-*
-* Limitations :
-* - cssVar only operates with top level (:root) CSS Variables, any
-* definition/overewritting done with another CSS slector will not be
-* detected, and could affect the proper behavior of cssVar.
-*
-* Eg.
-* <html>
-*     <style/>
-*         :root{
-*             --main-color : #F2A2BB;
-*             --textSize : 12;
-*         }
-*     </style>
-*     <script>
-*         // Note: Assuming css-var.js has been already attached to the docment
-*
-*         console.log ( cssVar['--main-color'] , cssVar.textSize );
-*         // output : "#F2A2BB" , "12"
-*
-*         cssVar['--main-color'] = 'red';
-*         cssVar.textSize = 20;
-*         console.log ( cssVar['--main-color'], cssVar.textSize );
-*         // output : "red" , "20"
-*     </script>
-* <html>
-*
+* @Description:
+*   The CSSGlobalVariables function provides a fast manipulation interface for
+*   your GLOBAL ( only those declared with :root selector ) CSS3 variables,
+*   simplifying the templating related tasks, through a natural interface:
+* @Basic usage:
+*   let cssVar = new CSSGlobalVariables();
+*   cssVar.myVariableName = "myVariableNewValue";
 *
 */
 
@@ -149,7 +121,7 @@ window.CSSGlobalVariables = (function(){
         const varsCacheProxy = new Proxy( __varsCache__ , {
             get: function( target, name ){
                 // check if there is any new CSS declarations to be considered
-                // before returning any value
+                // before returning any  
                 updateVarsCache();
                 name = normalizeVariableName( name );
                 return Reflect.get(target,name);

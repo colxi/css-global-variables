@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/markup-CSS3-blue.svg)
 
 # CSS3 Variables Manipulation with JS (ES6)
-The CSSGlobalVariables function provides a fast manipulation interface for your **GLOBAL ( only those declared with `:root` selector ) [CSS3 variables](https://www.w3.org/TR/css-variables-1/)**, simplifying the templating related scenarios & tasks, through a natural interface:
+The CSSGlobalVariables helper function provides a fast manipulation interface for your **GLOBAL ( only those declared with `:root` selector ) [CSS3 variables](https://www.w3.org/TR/css-variables-1/)**, simplifying the templating related scenarios & tasks, through a natural interface, in **less than 3Kb**.
 
 ```javascript
 // set the CSS global --myVariableName value  to "myVariableNewValue"
@@ -21,13 +21,13 @@ cssVar.myVariableName = "myVariableNewValue";
 #### Parameters:
 * **`autoPrefix`** :
 When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (Boolean. Optional. Default:`true`)
-    
+
 * **`filterSelector`** :
 Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (String|false. Optional. Default:`false`)
-    
+
 * **`declareGlobal`** :
 Declares a window global variable. Meant for debugging purposes. (String|false. Optional. Default : '__cssGlobals__')
-    
+
 * **`configObject`** :
 An Object containing any of the previous parameters as properties.
 
@@ -51,12 +51,12 @@ You can choose betwen any of the following available options/distribution channe
 
 1- Clone the repository locally, and attach the library to your Html document
  ```html
-<script src="path/to/css-global-variables.js"></script>
+<script src="path/to/css-global-variables.min.js"></script>
 ```
 
 2- Use the online delivery network
  ```html
-<script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.js"></script>
+<script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.min.js"></script>
 ```
 
 3- Install it using npm and import it. (unsafe! Not available in all browsers)
@@ -106,7 +106,7 @@ console.log( cssVar['--myVariable'] );
 ---
 
 ### Example
-The following example (available in ./demo), randomizes the background color, and the font size, each time receives a click.
+The following example (available in ./examples), randomizes the background color, and the font size, each time receives a click.
 You can test it [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
 
 style.css
@@ -156,7 +156,7 @@ index.html
 ```html
 <html>
     <head>
-         <script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.js"></script>
+         <script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-v   ariables.js"></script>
          <link rel="stylesheet " href="./style.css" />
          <script src="./demo.js"></script>
     </head>
