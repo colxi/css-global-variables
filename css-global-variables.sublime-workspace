@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"E",
+				"Error"
+			],
+			[
 				"user",
 				"userConfig〔variable〕"
 			],
@@ -156,19 +160,13 @@
 	"buffers":
 	[
 		{
-			"file": "css-var.js",
+			"contents": "/*\n*\n* @Author: colxi\n* @Email: colxi.kl@gmail.com\n* @Date:   2018-03-18 21:32:45\n* @Last Modified by:   colxi\n* @Last Modified time: 2018-03-22 05:25:55\n* @License : GPL-3.0\n\n*\n* @Description : Returns a live collection, for easy manipulation (get & set)  top level (:root)\n* CSS variables, simplifing the CSS based templating.\n*\n* Notes:\n* - The '--' variable name prefix , is not required when setting or getting\n* variables. It will be included automatically when ot provided. This feature\n* provides a more natural  & fast coding.\n* - The first time cssvar object is called, can generate a small delay, if the\n* document has extensive CSS definitions.\n*\n* Limitations :\n* - cssVar only operates with top level (:root) CSS Variables, any\n* definition/overewritting done with another CSS slector will not be\n* detected, and could affect the proper behavior of cssVar.\n*\n* Eg.\n* <html>\n*     <style/>\n*         :root{\n*             --main-color : #F2A2BB;\n*             --textSize : 12;\n*         }\n*     </style>\n*     <script>\n*         // Note: Assuming css-var.js has been already attached to the docment\n*\n*         console.log ( cssVar['--main-color'] , cssVar.textSize );\n*         // output : \"#F2A2BB\" , \"12\"\n*\n*         cssVar['--main-color'] = 'red';\n*         cssVar.textSize = 20;\n*         console.log ( cssVar['--main-color'], cssVar.textSize );\n*         // output : \"red\" , \"20\"\n*     </script>\n* <html>\n*\n*\n*/\n\n// TODO : refactory to Class, to allow multiple instances (right now, configuration\n// objectbis shared betwen all instances , with the last one provided , dominating )\n\n\n'use strict';\n\nconst CSSGlobalVariables = (function(){\n\n    let __identifierCounter__ = 0;\n\n    return function( filterSelector, autoPrefix, declareGlobal ){\n\n        if( !(this instanceof CSSGlobalVariables) ) throw new Error('TODO must be called with new');\n\n        /**\n         *\n         * [__config__ description]\n         * @type {Object}\n         *\n         */\n        const __config__ = {};\n\n        /**\n         *\n         * __varsCache__ : Contains internally the CSS variables and values.\n         * @type {Object}\n         *\n         */\n        const __varsCache__ = {};\n\n\n        /**\n         *\n         * [__constructor__ description]\n         * @param  {[type]} declareGlobal  [description]\n         * @param  {[type]} autoPrefix     [description]\n         * @param  {[type]} filterSelector [description]\n         *\n         * @return {[type]}                [description]\n         */\n        function __constructor__(  filterSelector, autoPrefix, declareGlobal ){\n            // if filterSelector is an object , asume is configuration,\n            // otherwhise fill the configuration object with the provided arguments\n            if( typeof filterSelector === 'object' ) Object.assign( __config__, filterSelector );\n            else{\n                __config__.filterSelector = filterSelector;\n                __config__.autoPrefix     = autoPrefix;\n                __config__.declareGlobal  = declareGlobal;\n            }\n            // default values\n            if( typeof __config__.filterSelector === 'undefined') __config__.filterSelector = false;\n            if( typeof __config__.autoPrefix === 'undefined') __config__.autoPrefix = true;\n            if( typeof __config__.declareGlobal === 'undefined') __config__.declareGlobal = '__cssGlobals__';\n\n            // validate values\n            if( typeof __config__.filterSelector !== 'string' && __config__.filterSelector !== false) throw new Error('TODO');\n            if( typeof __config__.autoPrefix !== 'boolean') throw new Error('TODO');\n            if( typeof __config__.declareGlobal !== 'string' && __config__.declareGlobal !== false) throw new Error('TODO');\n\n\n            if( __config__.declareGlobal ){\n                // Ensure the contents of the cache are up to date, when the cache object is\n                // requested, using a getter.\n                // It also declares the public window.cssVar reference, for user interaction\n\n                Object.defineProperty( window , __config__.declareGlobal  , {\n                    get : function(){\n                        updateVarsCache();\n                        return varsCacheProxy;\n                    },\n                    configurable : true\n                });\n            }\n\n            if( __config__.filterSelector ){\n                try{ document.querySelectorAll( __config__.filterSelector ) }\n                catch(e){\n                    throw new Error('TODO');\n                }\n            }\n\n            __identifierCounter__++;\n            __config__.id = __identifierCounter__;\n\n        }\n\n\n        /**\n         *\n         * varsCacheProxy (Proxy Object) : Public Proxy object containing the CSS\n         * variables and their values. Provides bindeºd methods for live getting and\n         * setting, the variables values.\n         *\n         * @type {Proxy Object}\n         *\n         */\n        const varsCacheProxy = new Proxy( __varsCache__ , {\n            get: function( target, name ){\n                // check if there is any new CSS declarations to be considered\n                // before returning any value\n                updateVarsCache();\n                name = normalizeVariableName( name );\n                return Reflect.get(target,name);\n            },\n            set: function(target, name, value){\n                updateVarsCache();\n                name = normalizeVariableName( name );\n                value = String(value);\n                // set the variable value\n                document.documentElement.style.setProperty( name, value );\n                // update th cache object\n                Reflect.set(target, name, value);\n            },\n            deleteProperty: function () {\n                /* not allowed */\n                updateVarsCache();\n                return false;\n            },\n            ownKeys: function (target) {\n                updateVarsCache();\n                return Reflect.ownKeys(target);\n            },\n            has: function (target, name) {\n                updateVarsCache();\n                name = normalizeVariableName( name );\n                return Reflect.has(target,name);\n            },\n            defineProperty: function (target, name, attr) {\n                //\n                // it only allows to set the value\n                //\n                updateVarsCache();\n                name = normalizeVariableName( name );\n                if( typeof attr==='object' && attr.hasOwnProperty('value') ){\n                    let value = String(attr.value);\n                    // set the CSS variable value\n                    document.documentElement.style.setProperty( name , value );\n                    // update the cache\n                    Reflect.set(target, name, value);\n                }\n                return target;\n            },\n            getOwnPropertyDescriptor: function(target, name) {\n                updateVarsCache();\n                name = normalizeVariableName( name );\n                return Reflect.getOwnPropertyDescriptor(target, name);\n            }\n        });\n\n        /**\n         *\n         * [normalizeVariableName description]\n         * @param  {[type]} name [description]\n         *\n         * @return {[type]}      [description]\n         *\n         */\n        function normalizeVariableName( name = '' ){\n            name = String(name);\n            if( name.substring(0,2) !=='--' ){\n                if(__config__.autoPrefix ) name = '--' + name;\n                else throw new Error('Invalid CSS Variable name. Name must start with \"--\" (autoPrefix=false)');\n            }\n            return name;\n        }\n\n\n        /**\n         *\n         * updateVarsCache() : Updates the variables and values cache objec. Inspects\n         * STYLE elements and attached stylesheets, ignoring those that have been\n         * previously checked. Finally checks the inline CSS variables declarations.\n         * Analized Elements will be Flagged wth the attribute data-css-var-cached\n         *\n         * @return {[boolean]} Returns true\n         * \n         */\n        function updateVarsCache(){\n            // iterate all CSS files attached to document, and extract all the\n            // varibles set inside the :root selector\n            [].slice.call(document.styleSheets).reduce( (prev,styleSheet)=>{\n                // if filters have been provided to constructor...\n                if( __config__.filterSelector ){\n                    // get all style type elements, and ignore current if not\n                    // been selected by the provided filter\n                    let s = document.querySelectorAll( __config__.filterSelector );\n                    let isSelected = false;\n                    for( let i in s ) if( s.hasOwnProperty(i) && styleSheet.ownerNode === s[i] ){\n                        isSelected = true;\n                    }\n                    if(!isSelected) return;\n                }\n                // if Style element has been previously analized ignore it, if\n                // not mark element as analized to prevent future analysis\n                //\n                // TODO: because can exist many instances, with diferent filtering rules\n                // each instance should have an ID, that should be reflected in the\n                // CHECK flag of the element , to allow other instances analize the\n                // contents of element\n                //\n                let  ids = styleSheet.ownerNode.getAttribute('css-global-vars-id');\n                if( String(ids).split(',').includes( String(__config__.id) ) ) return;\n                else{\n                    let value = styleSheet.ownerNode.getAttribute('css-global-vars-id');\n                    // todo : check if is null, or if has 1 or more elements, to add co  a or not\n                    if( value === null || value === '' ) value = __config__.id;\n                    else value += ',' + __config__.id;\n                    styleSheet.ownerNode.setAttribute('css-global-vars-id', value);\n                }\n                // iiterateneach CSS rule (if found)\n                if (!styleSheet.cssRules) return;\n                else return prev + [].slice.call(styleSheet.cssRules).reduce( (prev, cssRule)=>{\n                    // select only the :root entries\n                    if ( cssRule.selectorText === ':root' ) {\n                        let css = cssRule.cssText.split( '{' );\n                        css = css[1].replace( '}' , '' ).split( ';' );\n                        // iterate each :root CSS property\n                        for (let i = 0; i < css.length; i++) {\n                            let prop = css[i].split(':');\n                            // if is a varIABLE property, insert in in cache\n                            if (prop.length === 2 && prop[0].indexOf('--') === 1){\n                                __varsCache__[ prop[0].trim() ] = prop[1].trim();\n                            }\n                        }\n                    }\n                }, '');\n            }, '');\n            // After collecting all the variables definitions, check their computed\n            // values, consulting the :root element inline style definitions,\n            // and and assigning those values to the variables, in cache\n            for( let p in __varsCache__){\n                if( __varsCache__.hasOwnProperty(p) ){\n                    __varsCache__[p] = window.getComputedStyle(document.documentElement,null).getPropertyValue(p).trim();\n                }\n            }\n            // done !\n            return true;\n        }\n\n        __constructor__( filterSelector, autoPrefix, declareGlobal );\n\n        updateVarsCache();\n        return varsCacheProxy;\n    };\n\n})();\n",
+			"file": "src/css-var.js",
+			"file_size": 11768,
+			"file_write_time": 131661951584328050,
 			"settings":
 			{
-				"buffer_size": 10198,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "demo/demo.js",
-			"settings":
-			{
-				"buffer_size": 434,
+				"buffer_size": 11768,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -177,8 +175,7 @@
 			"file": "demo/index.html",
 			"settings":
 			{
-				"buffer_size": 232,
-				"encoding": "UTF-8",
+				"buffer_size": 236,
 				"line_ending": "Unix"
 			}
 		}
@@ -332,19 +329,24 @@
 	"expanded_folders":
 	[
 		"/D/Users/colxi/projects/code/css-var",
-		"/D/Users/colxi/projects/code/css-var/demo"
+		"/D/Users/colxi/projects/code/css-var/demo",
+		"/D/Users/colxi/projects/code/css-var/src"
 	],
 	"file_history":
 	[
+		"/C/Program Files (x86)/Silverlake Software LLC/Velocity/wwwroot/dist/site.css",
+		"/C/Program Files (x86)/Silverlake Software LLC/Velocity/wwwroot/dist/vendor.js",
+		"/C/Program Files (x86)/Silverlake Software LLC/Velocity/wwwroot/dist/main-client.js",
+		"/D/Users/colxi/projects/code/css-var/demo/demo.js",
+		"/D/Users/colxi/projects/code/css-var/demo/index.html",
+		"/D/Users/colxi/projects/code/css-var/README.md",
+		"/D/Users/colxi/projects/code/css-var/src/css-var.js",
+		"/D/Users/colxi/projects/code/css-var/css-var.js",
 		"/D/Users/colxi/projects/code/chip8-wasm/src/gui.js",
 		"/D/Users/colxi/projects/code/chip8-wasm/src/index.html",
 		"/D/Users/colxi/projects/code/chip8-wasm/.eslintrc.json",
 		"/D/Users/colxi/projects/code/css-var/demo/style.css",
-		"/D/Users/colxi/projects/code/css-var/demo/demo.js",
 		"/C/Users/colxi/AppData/Local/Temp/7zO4B94FC41/cnvyr.css",
-		"/D/Users/colxi/projects/code/css-var/css-var.js",
-		"/D/Users/colxi/projects/code/css-var/README.md",
-		"/D/Users/colxi/projects/code/css-var/demo/index.html",
 		"/D/Users/colxi/projects/code/css-var/package.json",
 		"/D/Users/colxi/projects/code/css-var/index.html",
 		"/D/Users/colxi/projects/code/_css-var/README.md",
@@ -459,11 +461,7 @@
 		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/imgs/favicon/browserconfig.xml",
 		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wonders/imgs/favicon/manifest.json",
 		"/C/Users/colxi.kl/Projects/code/is-port-available/index.js",
-		"/C/Users/colxi.kl/Projects/code/is-port-available/package.json",
-		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/FORM/validation.js",
-		"//COLXI-CROP/Projects/incrop/crop-manager/pg-views/crops/list.html",
-		"//COLXI-CROP/Projects/incrop/crop-manager/pg-wrapper/pg-modules/JSON/parseXML.js",
-		"/C/Users/colxi.kl/Desktop/New Super Mario Bros/Léeme.txt"
+		"/C/Users/colxi.kl/Projects/code/is-port-available/package.json"
 	],
 	"find":
 	{
@@ -481,6 +479,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"buy",
+			"dev",
+			"rt",
+			"rt[",
+			"rt",
+			"keyu",
+			"keyd",
+			"change",
+			"change ",
+			"change",
+			"secon",
+			"settim",
+			"setint",
+			"pop",
+			"licen",
+			"todo",
 			"prefixVariableName",
 			"todo",
 			"to do",
@@ -592,23 +606,7 @@
 			"stat",
 			"env",
 			"main",
-			"missing function:",
-			"fixImports",
-			"doNativeWasm",
-			"env",
-			"info",
-			"WebAssembly.instantiate",
-			"_console",
-			"console",
-			"__ATMAIN__",
-			"__ATINIT__",
-			"event",
-			"__ATINIT__",
-			"runtimeInitialized",
-			"ready",
-			"exports",
-			"instantiateArrayBuffer",
-			"WebAssembly.instantiate"
+			"missing function:"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -645,47 +643,37 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "css-var.js",
+					"file": "src/css-var.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10198,
+						"buffer_size": 11768,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1667,
-								1667
+								8116,
+								8116
 							]
 						],
 						"settings":
 						{
-							"SL.14.region_keys":
+							"SL.25.region_keys":
 							[
-								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
-								"SL.eslint.Gutter.region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter.dot",
-								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32",
-								"sublime_linter.protected_regions",
-								"SL.eslint.Highlights.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|32"
-							],
-							"SL.17.region_keys":
-							[
-								"sublime_linter.protected_regions",
-								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
-								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32"
+								"sublime_linter.protected_regions"
 							],
 							"auto_complete": false,
 							"bracket_highlighter.busy": false,
@@ -696,8 +684,8 @@
 								{
 									"1":
 									[
-										10190,
-										10191
+										11757,
+										11758
 									]
 								},
 								"icon":
@@ -712,8 +700,8 @@
 								{
 									"1":
 									[
-										1639,
-										1640
+										1758,
+										1759
 									]
 								},
 								"unmatched":
@@ -722,16 +710,46 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -746,37 +764,7 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -784,8 +772,8 @@
 								{
 									"1":
 									[
-										10190,
-										10191
+										11758,
+										11759
 									]
 								},
 								"icon":
@@ -800,8 +788,8 @@
 								{
 									"1":
 									[
-										1639,
-										1640
+										1758,
+										1759
 									]
 								},
 								"unmatched":
@@ -810,16 +798,46 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -834,40 +852,10 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly_content"
 							],
 							"bs_sintax": "javascript (babel)",
-							"buffer_scroll_name": "99065a82",
+							"buffer_scroll_name": "36be1324",
 							"c_time":
 							[
 								128,
@@ -898,13 +886,13 @@
 								7,
 								226,
 								3,
-								19,
-								12,
-								25,
-								34,
-								5,
-								4,
-								191,
+								21,
+								20,
+								51,
+								0,
+								1,
+								137,
+								151,
 								113,
 								1,
 								133,
@@ -921,315 +909,46 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1392.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "demo/demo.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 434,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								434,
-								434
-							]
-						],
-						"settings":
-						{
-							"SL.17.region_keys":
-							[
-								"SL.eslint.Gutter.region.redish markup.deleted.sublime_linter markup.error.sublime_linter.dot",
-								"SL.eslint.Gutter.region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter.dot",
-								"SL.eslint.Highlights.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|32",
-								"sublime_linter.protected_regions",
-								"SL.eslint.Highlights.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|32"
-							],
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
-							"bracket_highlighter.clone_locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										438,
-										439
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"region.purplish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										80,
-										81
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.clone_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"bs_sintax": "javascript (babel)",
-							"buffer_scroll_name": "42c8be92",
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								226,
-								3,
-								19,
-								15,
-								22,
-								34,
-								2,
-								22,
-								53,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"spell_check": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3561.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "demo/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 232,
+						"buffer_size": 236,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								102,
-								102
+								6,
+								6
 							]
 						],
 						"settings":
 						{
-							"SL.15.region_keys":
+							"SL.64.region_keys":
 							[
 							],
-							"SL.18.region_keys":
-							[
-							],
-							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.clone": -1,
 							"bracket_highlighter.clone_locations":
 							{
 								"close":
 								{
-									"1":
-									[
-										66,
-										67
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
-										"region.greenish"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										54,
-										55
-									]
 								},
 								"unmatched":
 								{
@@ -1237,104 +956,46 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										105,
-										106
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
-										"region.greenish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										91,
-										92
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1349,37 +1010,85 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_curly_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+									"1":
+									[
+										1,
+										5
+									]
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
-								"bh_square_content"
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
 							"bs_sintax": "html",
 							"buffer_scroll_name": "e8379c4a",
@@ -1413,13 +1122,13 @@
 								7,
 								226,
 								3,
-								19,
-								15,
-								24,
-								37,
-								12,
-								45,
-								254,
+								21,
+								20,
+								51,
+								0,
+								0,
+								231,
+								57,
 								113,
 								1,
 								133,
@@ -1476,7 +1185,11 @@
 	"menu_visible": false,
 	"output.SublimeLinter":
 	{
-		"height": 0.0
+		"height": 174.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 186.0
 	},
 	"output.exec":
 	{

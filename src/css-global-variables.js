@@ -4,7 +4,7 @@
 * @Email: colxi.kl@gmail.com
 * @Date:   2018-03-18 21:32:45
 * @Last Modified by:   colxi
-* @Last Modified time: 2018-03-22 05:25:55
+* @Last Modified time: 2018-03-23 14:22:33
 * @License : GPL-3.0
 
 *
@@ -47,23 +47,21 @@
 *
 */
 
-// TODO : refactory to Class, to allow multiple instances (right now, configuration
-// objectbis shared betwen all instances , with the last one provided , dominating )
 
+window.CSSGlobalVariables = (function(){
+    'use strict';
 
-'use strict';
-
-const CSSGlobalVariables = (function(){
-
+    // private ID counter
     let __identifierCounter__ = 0;
 
+    // Returns public __constructor__() function
     return function( filterSelector, autoPrefix, declareGlobal ){
 
-        if( !(this instanceof CSSGlobalVariables) ) throw new Error('TODO must be called with new');
+        if( !(this instanceof window.CSSGlobalVariables) ) throw new Error('calling CSSGlobalVariables constructor without new is forbidden');
 
         /**
          *
-         * [__config__ description]
+         * __config__  : Object containing the instance configurqtion
          * @type {Object}
          *
          */
@@ -80,14 +78,18 @@ const CSSGlobalVariables = (function(){
 
         /**
          *
-         * [__constructor__ description]
-         * @param  {[type]} declareGlobal  [description]
-         * @param  {[type]} autoPrefix     [description]
-         * @param  {[type]} filterSelector [description]
+         * __constructor__() : Public constructor, returns a Proxy Object, wich
+         * properties are the CSS Global Variables detected. Allows configuration
+         * through parameters.
          *
-         * @return {[type]}                [description]
+         * @param  {[string|false|Object]}  filterSelector
+         * @param  {[boolean]}              autoPrefix
+         * @param  {[string|false]}         declareGlobal
+         *
+         * @return {[Proxy Object]}
+         *
          */
-        function __constructor__(  filterSelector, autoPrefix, declareGlobal ){
+        function __constructor__( filterSelector, autoPrefix, declareGlobal ){
             // if filterSelector is an object , asume is configuration,
             // otherwhise fill the configuration object with the provided arguments
             if( typeof filterSelector === 'object' ) Object.assign( __config__, filterSelector );
@@ -102,9 +104,9 @@ const CSSGlobalVariables = (function(){
             if( typeof __config__.declareGlobal === 'undefined') __config__.declareGlobal = '__cssGlobals__';
 
             // validate values
-            if( typeof __config__.filterSelector !== 'string' && __config__.filterSelector !== false) throw new Error('TODO');
-            if( typeof __config__.autoPrefix !== 'boolean') throw new Error('TODO');
-            if( typeof __config__.declareGlobal !== 'string' && __config__.declareGlobal !== false) throw new Error('TODO');
+            if( typeof __config__.filterSelector !== 'string' && __config__.filterSelector !== false) throw new Error('"filterSelector" parameter must be a String or false');
+            if( typeof __config__.autoPrefix !== 'boolean') throw new Error('"autoPrefix" parameter must be a Boolean');
+            if( typeof __config__.declareGlobal !== 'string' && __config__.declareGlobal !== false) throw new Error('"declareGlobal" parameter must be a String or false');
 
 
             if( __config__.declareGlobal ){
@@ -124,13 +126,14 @@ const CSSGlobalVariables = (function(){
             if( __config__.filterSelector ){
                 try{ document.querySelectorAll( __config__.filterSelector ) }
                 catch(e){
-                    throw new Error('TODO');
+                    throw new Error('Provided "filterSelector" is an invalid selector ("'+filterSelector+'")');
                 }
             }
 
             __identifierCounter__++;
             __config__.id = __identifierCounter__;
 
+            return;
         }
 
 
@@ -198,10 +201,12 @@ const CSSGlobalVariables = (function(){
 
         /**
          *
-         * [normalizeVariableName description]
-         * @param  {[type]} name [description]
+         * normalizeVariableName()  Forces name to be a String, and attach the
+         * mandatory '--' prefix when autoPrefixer is Enabled
          *
-         * @return {[type]}      [description]
+         * @param  {[String]} name  Name of thw requested variable
+         *
+         * @return {[String]}
          *
          */
         function normalizeVariableName( name = '' ){
@@ -219,7 +224,7 @@ const CSSGlobalVariables = (function(){
          * updateVarsCache() : Updates the variables and values cache objec. Inspects
          * STYLE elements and attached stylesheets, ignoring those that have been
          * previously checked. Finally checks the inline CSS variables declarations.
-         * Analized Elements will be Flagged wth the attribute data-css-var-cached
+         * Analized Elements will be Flagged wth an Htmlmattribute
          *
          * @return {[boolean]} Returns true
          *
@@ -241,22 +246,20 @@ const CSSGlobalVariables = (function(){
                 }
                 // if Style element has been previously analized ignore it, if
                 // not mark element as analized to prevent future analysis
-                //
-                // TODO: because can exist many instances, with diferent filtering rules
-                // each instance should have an ID, that should be reflected in the
-                // CHECK flag of the element , to allow other instances analize the
-                // contents of element
-                //
                 let  ids = styleSheet.ownerNode.getAttribute('css-global-vars-id');
+
                 if( String(ids).split(',').includes( String(__config__.id) ) ) return;
                 else{
+                    // not cached yet!
                     let value = styleSheet.ownerNode.getAttribute('css-global-vars-id');
-                    // todo : check if is null, or if has 1 or more elements, to add co  a or not
+                    // check if is null or empty (crossbrowser solution), and
+                    // attach the new instance id
                     if( value === null || value === '' ) value = __config__.id;
                     else value += ',' + __config__.id;
+                    // set the new value to the object
                     styleSheet.ownerNode.setAttribute('css-global-vars-id', value);
                 }
-                // iiterateneach CSS rule (if found)
+                // iterate each CSS rule (if found)
                 if (!styleSheet.cssRules) return;
                 else return prev + [].slice.call(styleSheet.cssRules).reduce( (prev, cssRule)=>{
                     // select only the :root entries
@@ -286,10 +289,12 @@ const CSSGlobalVariables = (function(){
             return true;
         }
 
+        // call the constructor, analize the document style elements to generate
+        // the collection of css variables, and return the proxy object
         __constructor__( filterSelector, autoPrefix, declareGlobal );
-
         updateVarsCache();
         return varsCacheProxy;
     };
-
 })();
+
+
