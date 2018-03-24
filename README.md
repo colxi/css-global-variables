@@ -67,13 +67,13 @@ $ npm install css-global-variables
 // static import
 import 'path/to/css-global-variables.js';
 // or dynamic import inside an async function
-await import("path/to/css-global.variables.jsm")
+await import("path/to/css-global.variables.js")
 ```
 
 Once he library is attached/imported with any of the previous methods, the global Constructor `CSSGlobalVariables` becomes available, and ready for usage!
 
 ## Usage
-The Construcyor returns a Proxy Object. Any regular Object operation can be performed on it. It couldn't be easier. We are going to focus here, only in the most useful and interesting ones : **construction, enumeration , get , set**
+The Construcyor returns a Proxy Object. Any regular Object operation can be performed on it. It couldn't be easier. We are going to focus here, only in the most useful and interesting ones : **construction, enumeration , set , get**
 
 **Construction** returns the live Objec:
 ```javascript
@@ -168,10 +168,13 @@ demo-simple.html
 
 ---
 #### Note:
-When you check the value of any of the CSS Variables in the returned Proxy Object, **it will always display an updated value**, because in each acces, it performs internally a scan & update, before retuning anything.
+*When you check the value of any of the CSS Variables in the returned Proxy Object, **it will always display an updated value**, because in each acces, it performs internally a scan & update, before retuning anything.*
 
-However if you send to the console the **whole Object**, its contents values may not be updated (if you attached a new Style Element, or modified the value in the DOM Inspector, for example).
+*However if you send to the console the **whole Object**, its contents values may not be updated (if you attached a new Style Element, or modified the value in the DOM Inspector, for example).*
 
-This behavior is caused by the way the Browser Console overrides the methods to acces the Proxy members.
+**This behavior is caused by the way the Browser Console overrides the methods to acces the Proxy members.**
 
 Workarround: With the`declareGlobal` configuration parameter, you can force the generation of a global variable, wich is not affected by this issue.
+
+#### License :
+GPL 3.0   
