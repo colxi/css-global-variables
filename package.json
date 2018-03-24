@@ -1,21 +1,26 @@
 {
   "author": "colxi <colxi.kl@gmail.com> (http://www.colxi.info)",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "keywords": [
+    "css global variables",
+    "css vars helper",
+    "css variables helper",
     "cssvar",
+    "cssvars",
     "css variable",
+    "css globals",
     "css vars",
     "templating",
     "css templating",
     "html templating"
   ],
-  "name": "css-var-helper",
-  "description": "Provides easy manipulation of the Global CSS variables in the Browser",
-  "main": "css-var.js",
+  "name": "css-global-variables",
+  "description": "Manipulate CSS3 Global Variables with Javascript, like regular variables.",
+  "main": "src/css-global-variables.js",
   "license": "GPL-3.0",
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/colxi/css-var.git"
+    "url": "https://github.com/colxi/css-global-variables.git"
   }
 }
