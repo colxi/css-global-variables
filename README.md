@@ -20,13 +20,13 @@ cssVar.myVariableName = "myVariableNewValue";
 
 #### Parameters:
 * **`autoPrefix`** :
-When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (Boolean. Optional. Default:`true`)
+When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (*Boolean. Optional. Default:`true`*)
 
 * **`filterSelector`** :
-Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (String|false. Optional. Default:`false`)
+Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (*String|false. Optional. Default:`false`*)
 
 * **`declareGlobal`** :
-Declares a window global variable. Meant for debugging purposes. (String|false. Optional. Default : '__cssGlobals__')
+Declares a window global variable. Meant for debugging purposes. (String|false. Optional. Default : '*__cssGlobals__'*)
 
 * **`configObject`** :
 An Object containing any of the previous parameters as properties.
@@ -105,7 +105,7 @@ console.log( cssVar['--myVariable'] );
 
 ---
 
-### Example
+## Examples
 The following example (available in ./examples), randomizes the background color, and the font size, each time receives a click.
 You can test it [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
 
@@ -166,3 +166,12 @@ index.html
  <html>
  ```
 
+---
+#### Note:
+When you check the value of any of the CSS Variables in the returned Proxy Object, **it will always display an updated value**, because in each acces, it performs internally a scan & update, before retuning anything.
+
+However if you send to the console the **whole Object**, its contents values may not be updated (if you attached a new Style Element, or modified the value in the DOM Inspector, for example).
+
+This behavior is caused by the way the Browser Console overrides the methods to acces the Proxy members.
+
+Workarround: With the`declareGlobal` configuration parameter, you can force the generation of a global variable, wich is not affected by this issue.
