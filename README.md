@@ -109,7 +109,7 @@ console.log( cssVar['--myVariable'] );
 The following example (available in ./examples), randomizes the background color, and the font size, each time receives a click.
 You can test it [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
 
-style.css
+demo-simple.css
 ```css
 :root{
     /* declaration of some CSS3 global variables */
@@ -137,7 +137,7 @@ div{
 }
 ```
 
-demo.js
+demo-simple.js
 ```javascript
 // on document ready...
 document.addEventListener('DOMContentLoaded', function(){
@@ -152,13 +152,13 @@ document.addEventListener('DOMContentLoaded', function(){
 } , false);
 ```
 
-index.html
+demo-simple.html
 ```html
 <html>
     <head>
-         <script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-v   ariables.js"></script>
-         <link rel="stylesheet " href="./style.css" />
-         <script src="./demo.js"></script>
+         <script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.js"></script>
+         <link rel="stylesheet" href="./demo-simple.css" />
+         <script src="./demo-simple.js"></script>
     </head>
     <body>
         <div>Randomize!</div>
