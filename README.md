@@ -51,12 +51,12 @@ You can choose betwen any of the following available options/distribution channe
 
 1- Clone the repository locally, and attach the library to your Html document
  ```html
-<script src="path/to/css-global-variables.min.js"></script>
+<script src="path/to/css-global-variables.js"></script>
 ```
 
 2- Use the online delivery network
  ```html
-<script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.min.js"></script>
+<script src="https://cdn.rawgit.com/colxi/css-global-variables/master/src/css-global-variables.js"></script>
 ```
 
 3- Install it using npm and import it. (unsafe! Not available in all browsers)
@@ -77,7 +77,7 @@ The Construcyor returns a Proxy Object. Any regular Object operation can be perf
 
 **Construction** returns the live Objec:
 ```javascript
-let cssVar = new CSSGLlobalVariables();
+let cssVar = new CSSGlobalVariables();
 ```
 
 **Enumeration** of all declared CSS3 global variables, iterating the returned Object :
@@ -141,7 +141,7 @@ demo-simple.js
 ```javascript
 // on document ready...
 document.addEventListener('DOMContentLoaded', function(){
-    let cssVar = new CSSGLlobalVariables();
+    let cssVar = new CSSGlobalVariables();
     // ...attach click event to te body
     document.body.addEventListener('click', function(){
         /* Generate and assign random color */

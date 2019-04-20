@@ -133,7 +133,7 @@ window.CSSGlobalVariables = (function(){
                 // set the variable value
                 document.documentElement.style.setProperty( name, value );
                 // update th cache object
-                Reflect.set(target, name, value);
+                return Reflect.set(target, name, value);
             },
             deleteProperty: function () {
                 /* not allowed */
