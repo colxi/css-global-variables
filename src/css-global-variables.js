@@ -7,7 +7,6 @@
 * @Date:   2018-03-18 21:32:45
 * @Last Modified by:   colxi
 * @Last Modified time: 2019-03-23 16:09:54
-* @License : GPL-3.0
 *
 
 */
