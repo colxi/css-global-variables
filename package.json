@@ -1,6 +1,6 @@
 {
   "author": "colxi <colxi.kl@gmail.com> (http://www.colxi.info)",
-  "version": "1.0.2",
+  "version": "2.0.2",
   "keywords": [
     "css global variables",
     "css vars helper",
@@ -17,7 +17,7 @@
   "name": "css-global-variables",
   "description": "Manipulate CSS3 Global Variables with Javascript, like regular variables.",
   "main": "src/css-global-variables.js",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "dependencies": {},
   "repository": {
     "type": "git",

@@ -1,15 +1,9 @@
-/* Globals declaration for Linter */
-/* globals CSSGlobalVariables     */
+import {CSSGlobalVariables} from '../src/css-global-variables.js';
+let cssVar = new CSSGlobalVariables();
 
-document.addEventListener('DOMContentLoaded', function(){
-    let cssVar = new CSSGlobalVariables();
-    // ...attach click event to te body
-    setInterval(function(){
-        /* Generate and assign random color */
-        cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
-        /* Generate and assign random size, betwen 15 and 45 */
-        cssVar.textSize = Math.floor( Math.random()*30+15 );
-    },50);
-} , false);
-
-
+setInterval(function(){
+    /* Randomize color , size and rotation */
+    cssVar.primaryColor = '#'+Math.random().toString(16).substr(-6);
+    cssVar.textSize = Math.floor( Math.random()*30+15 );
+    cssVar.rotation = Math.floor( Math.random()*360 )+'deg';
+},500);

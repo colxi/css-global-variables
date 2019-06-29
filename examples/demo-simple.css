@@ -2,6 +2,7 @@
     /* declaration of some global variables */
     --primaryColor : #F2A2BB;
     --textSize : 12;
+    --rotation : 20deg;
 }
 
 body{
@@ -11,7 +12,8 @@ body{
     text-align:center;
     margin: 0;
     height: 100%;
-    cursor:pointer;
+    transition: all .5s;
+    overflow:hidden;
 }
 
 div{
@@ -19,5 +21,8 @@ div{
     font-size: calc( var(--textSize) * 1px );
     /* Some extra styling ... */
 	position:relative;
-	top:50%;
+    top:50%;
+    transition: all .5s;
+    transform: rotate(var(--rotation) );
+
 }
