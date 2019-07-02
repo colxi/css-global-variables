@@ -4,81 +4,64 @@
 * @Url: https://github.com/colxi/css-global-variables/
 * @Author: colxi
 * @Email: colxi.kl@gmail.com
-* @Date:   2018-03-18 21:32:45
-* @Last Modified by:   colxi
-* @Last Modified time: 2019-03-23 16:09:54
+* @Date:  2018-03-18
 *
-
 */
 
 // private ID counter
 let __identifierCounter__ = 0;
 
-// Returns public __constructor__() function
-const CSSGlobalVariables = function( filterSelector, autoPrefix ){
+/**
+ *  
+ * new CSSGlobalVariables() : Returns a Proxy containing all the  found CSS Global Variables. 
+ *                            Accepts a Configuration Object, with the following properties:
+ *     filter : [String],
+ *     autoprefix     : [Boolean],
+ *     normalize  : [Function]
+ * 
+ **/
+const CSSGlobalVariables = function( configObj = {} ){
+    
+    // Usage of 'new' keyword is mandatory
+    if( !new.target ) throw new Error('Calling CSSGlobalVariables constructor without "new" is forbidden');
 
-    if( !(this instanceof CSSGlobalVariables) ) throw new Error('calling CSSGlobalVariables constructor without new is forbidden');
+    // __config__  : Object containing the instance configuration. 
+    // Declare config properties and default values...
+    const __config__ = {
+        filter         : false,
+        autoprefix     : true,
+        normalize      : false
+    };
+    
+    // Validate Config Object type and property values types
+    if( typeof configObj !== 'object' ) throw new Error('CSSGlobalVariables constructor expects a config Object as first argument');
 
-    /**
-     *
-     * __config__  : Object containing the instance configurqtion
-     * @type {Object}
-     *
-     */
-    const __config__ = {};
-
-    /**
-     *
-     * __varsCache__ : Contains internally the CSS variables and values.
-     * @type {Object}
-     *
-     */
-    const __varsCache__ = {};
-
-
-    /**
-     *
-     * __constructor__() : Public constructor, returns a Proxy Object, wich
-     * properties are the CSS Global Variables detected. Allows configuration
-     * through parameters.
-     *
-     * @param  {[string|false|Object]}  filterSelector
-     * @param  {[boolean]}              autoPrefix
-     *
-     * @return {[Proxy Object]}
-     *
-     */
-    function __constructor__( filterSelector, autoPrefix ){
-        // if filterSelector is an object , asume is configuration,
-        // otherwhise fill the configuration object with the provided arguments
-        if( typeof filterSelector === 'object' ) Object.assign( __config__, filterSelector );
+    if( configObj.hasOwnProperty('normalize') && typeof configObj.normalize !== 'function' ){
+        throw new Error('Config property "normalize" must be a function');
+    }
+    if( configObj.hasOwnProperty('autoprefix') && typeof configObj.autoprefix !== 'boolean' ){
+        throw new Error('Config property "autoprefix" must be a boolean');
+    }
+    if( configObj.hasOwnProperty('filter') ){
+        if( typeof configObj.filter !== 'string' ) throw new Error('Config property "filter" must be a string');
         else{
-            __config__.filterSelector = filterSelector;
-            __config__.autoPrefix     = autoPrefix;
-        }
-        // default values
-        if( typeof __config__.filterSelector === 'undefined') __config__.filterSelector = false;
-        if( typeof __config__.autoPrefix === 'undefined') __config__.autoPrefix = true;
-
-        // validate values
-        if( typeof __config__.filterSelector !== 'string' && __config__.filterSelector !== false) throw new Error('"filterSelector" parameter must be a String or false');
-        if( typeof __config__.autoPrefix !== 'boolean') throw new Error('"autoPrefix" parameter must be a Boolean');
-
-
-
-        if( __config__.filterSelector ){
-            try{ document.querySelectorAll( __config__.filterSelector ) }
+            try{ document.querySelectorAll( configObj.filter ) }
             catch(e){
-                throw new Error('Provided "filterSelector" is an invalid selector ("'+filterSelector+'")');
+                throw new Error('Provided "filter" is an invalid selector ("'+configObj.filter+'")');
             }
         }
-
-        __identifierCounter__++;
-        __config__.id = __identifierCounter__;
-
-        return;
     }
 
+    // Assign user provided config to config object
+    Object.assign(__config__, configObj);
+
+    // Generate and assign instance ID
+    __identifierCounter__++;
+    __config__.id = __identifierCounter__;
+
+
+    // __varsCache__ : Contains (internally) the CSS variables and values.
+    const __varsCache__ = {};
 
     /**
      *
@@ -111,10 +94,6 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
             //updateVarsCache();
             return false;
         },
-        ownKeys: function (target) {
-            //updateVarsCache();
-            return Reflect.ownKeys(target);
-        },
         has: function (target, name) {
             //updateVarsCache();
             name = normalizeVariableName( name );
@@ -135,6 +114,10 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
             }
             return target;
         },
+        ownKeys: function (target) {
+            //updateVarsCache();
+            return Reflect.ownKeys(target);
+        },
         getOwnPropertyDescriptor: function(target, name) {
             //updateVarsCache();
             name = normalizeVariableName( name );
@@ -145,7 +128,7 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
     /**
      *
      * normalizeVariableName()  Forces name to be a String, and attach the
-     * mandatory '--' prefix when autoPrefixer is Enabled
+     * mandatory '--' prefix when autoprefixer is Enabled
      *
      * @param  {[String]} name  Name of thw requested variable
      *
@@ -154,10 +137,16 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
      */
     function normalizeVariableName( name = '' ){
         name = String(name);
+        // if normalize was provided execute it
+        if( __config__.normalize ) name = __config__.normalize( name );
+
+        // If CSSVar name does not start with '--', prefix it, when __config__.autoprefix=true,
+        // or trigger an Error when not.
         if( name.substring(0,2) !=='--' ){
-            if(__config__.autoPrefix ) name = '--' + name;
-            else throw new Error('Invalid CSS Variable name. Name must start with "--" (autoPrefix=false)');
+            if(__config__.autoprefix ) name = '--' + name;
+            else throw new Error('Invalid CSS Variable name. Name must start with "--" (autoprefix=false)');
         }
+        
         return name;
     }
 
@@ -173,14 +162,14 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
      *
      */
     function updateVarsCache(){
-        // iterate all CSS files attached to document, and extract all the
+        // iterate all document CSS files, and extract all the
         // varibles set inside the :root selector
         [].slice.call(document.styleSheets).reduce( (prev,_styleSheet)=>{
             // if filters have been provided to constructor...
-            if( __config__.filterSelector ){
+            if( __config__.filter ){
                 // get all style type elements, and ignore current if not
                 // been selected by the provided filter
-                let s = document.querySelectorAll( __config__.filterSelector );
+                let s = document.querySelectorAll( __config__.filter );
                 let isSelected = false;
                 for( let i in s ) if( s.hasOwnProperty(i) && _styleSheet.ownerNode === s[i] ){
                     isSelected = true;
@@ -203,16 +192,14 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
                 _styleSheet.ownerNode.setAttribute('css-global-vars-id', value);
             }
 
-            // ***** BUG Note :
-            // Detected an error in the next line of code, that affects Firefox 66 , 
-            // when trying to read CSS rules. A reference to this error is referenced also in :
-            // https://github.com/uber/react-vis/issues/682
-            // No workarrounds or fixes to it can be found anywhere. 
-            // ( It only affects in local execution mode )
-
-            // iterate each CSS rule (if found)
-            if (!_styleSheet.cssRules) return;
-            else return prev + [].slice.call(_styleSheet.cssRules).reduce( (prev, cssRule)=>{
+            // Use Try/Catch to detect Cross-Origin restrictions 
+            let rules;
+            try{ rules = _styleSheet.rules || _styleSheet.cssRules } 
+            catch(e){ console.warn( e ) }
+            
+            // iterate each CSS rule (if found). 
+            if (!rules) return;
+            else return prev + [].slice.call(rules).reduce( (prev, cssRule)=>{
                 // select only the :root entries
                 if ( cssRule.selectorText === ':root' ) {
                     let css = cssRule.cssText.split( '{' );
@@ -269,12 +256,8 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
         subtree: true
     });
 
-
-
-
-    // call the constructor, analize the document style elements to generate
+    // analize the document style elements to generate
     // the collection of css variables, and return the proxy object
-    __constructor__( filterSelector, autoPrefix );
     updateVarsCache();
     return varsCacheProxy;
 };
