@@ -15,7 +15,7 @@
 let __identifierCounter__ = 0;
 
 // Returns public __constructor__() function
-const CSSGlobalVariables = function( filterSelector, autoPrefix ){
+const CSSGlobalVariables = function( { filterSelector, autoPrefix, transformFunc }={} ){
 
     if( !(this instanceof CSSGlobalVariables) ) throw new Error('calling CSSGlobalVariables constructor without new is forbidden');
 
@@ -48,7 +48,7 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
      * @return {[Proxy Object]}
      *
      */
-    function __constructor__( filterSelector, autoPrefix ){
+    function __constructor__( filterSelector, autoPrefix, transformFunc ){
         // if filterSelector is an object , asume is configuration,
         // otherwhise fill the configuration object with the provided arguments
         if( typeof filterSelector === 'object' ) Object.assign( __config__, filterSelector );
@@ -56,9 +56,14 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
             __config__.filterSelector = filterSelector;
             __config__.autoPrefix     = autoPrefix;
         }
+        if( typeof transformFunc === 'function' ) __config__.transformFunc = transformFunc
+        else{
+            console.warn('transformFunc must be a function')
+        }
         // default values
         if( typeof __config__.filterSelector === 'undefined') __config__.filterSelector = false;
         if( typeof __config__.autoPrefix === 'undefined') __config__.autoPrefix = true;
+        if( typeof __config__.transformFunc !== 'function') __config__.transformFunc = null;
 
         // validate values
         if( typeof __config__.filterSelector !== 'string' && __config__.filterSelector !== false) throw new Error('"filterSelector" parameter must be a String or false');
@@ -154,10 +159,16 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
      */
     function normalizeVariableName( name = '' ){
         name = String(name);
+        if( __config__.transformFunc !== null ){
+            console.log('name before transformFunc:',name)
+            name = __config__.transformFunc( name )
+            console.log('name after transformFunc:',name)
+        }
         if( name.substring(0,2) !=='--' ){
             if(__config__.autoPrefix ) name = '--' + name;
             else throw new Error('Invalid CSS Variable name. Name must start with "--" (autoPrefix=false)');
         }
+        
         return name;
     }
 
@@ -211,8 +222,15 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
             // ( It only affects in local execution mode )
 
             // iterate each CSS rule (if found)
-            if (!_styleSheet.cssRules) return;
-            else return prev + [].slice.call(_styleSheet.cssRules).reduce( (prev, cssRule)=>{
+            let rules
+            try{
+                rules = _styleSheet.rules || _styleSheet.cssRules
+            }catch(e){
+                console.warn( e )
+            }
+
+            if (!rules) return;
+            else return prev + [].slice.call(rules).reduce( (prev, cssRule)=>{
                 // select only the :root entries
                 if ( cssRule.selectorText === ':root' ) {
                     let css = cssRule.cssText.split( '{' );
@@ -274,7 +292,7 @@ const CSSGlobalVariables = function( filterSelector, autoPrefix ){
 
     // call the constructor, analize the document style elements to generate
     // the collection of css variables, and return the proxy object
-    __constructor__( filterSelector, autoPrefix );
+    __constructor__( filterSelector, autoPrefix, transformFunc );
     updateVarsCache();
     return varsCacheProxy;
 };
