@@ -160,9 +160,7 @@ const CSSGlobalVariables = function( { filterSelector, autoPrefix, transformFunc
     function normalizeVariableName( name = '' ){
         name = String(name);
         if( __config__.transformFunc !== null ){
-            console.log('name before transformFunc:',name)
             name = __config__.transformFunc( name )
-            console.log('name after transformFunc:',name)
         }
         if( name.substring(0,2) !=='--' ){
             if(__config__.autoPrefix ) name = '--' + name;
