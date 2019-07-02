@@ -1,0 +1,18 @@
+:root{
+    /* 
+      Warning: Adding more variables will require changes in
+      test.js to prevent false positives
+     */
+    --primaryColor : #FFFFFF;
+    --textSize : 15;
+    --rotation : 0deg;
+}
+
+
+div{
+    font-size: calc( var(--textSize) * 1px );
+	position:relative;
+    transition: all .5s;
+    transform: rotate(var(--rotation) );
+    background-color: var(--primaryColor);
+}

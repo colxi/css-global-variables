@@ -16,16 +16,21 @@ Demo : See it in action [here](https://colxi.github.io/css-global-variables/exam
 
 # Syntax:
 
-> new CSSGlobalVariables( [autoPrefix=true], [filterSelector=false] )
-
+> new CSSGlobalVariables( [ configObject ] )
 
 
 #### Parameters:
-* **`autoPrefix`** :
-When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. (*Boolean. Optional. Default:`true`*)
+A Config Object can be provided, to customize some internal behaviour. The provided object can set any of the following properties :
 
-* **`filterSelector`** :
-Allows to filter wich Style Elements should be scanned and ignnored, through regular CSS Selector strings. When set to `false`, everything is scanned. (*String|false. Optional. Default:`false`*)
+* **`autoprefix`** :
+When set to `true` allows acces to the CSS variables names without specifing the `--` prefix on the name. ( Boolean.  Default:`true`)
+
+* **`filter`** :
+Allows to filter which Style Elements should be scanned (and  which ignnored), through a regular CSS Selector strings. Bt default everything is scanned. (String. Default: `'*'`)
+
+* **`normalize`** :
+A user-provided transform-function, that processes the CSS Variable names (before they get autoPrefixed). The function must return a String. This mechanism allows the usage of custom variable names formating (eg. camelCase, snake_case, CONSTANT_CASE...) in your code. A nice source of transform functions is [change-case](https://www.npmjs.com/package/change-case) ( Function. Default: `none`)
+
 
 
 #### Return value:
@@ -36,36 +41,24 @@ The CSSGlobalVariables() Constructor returns a Proxy Object containing a **live 
 
 You can choose betwen any of the following available options/distribution channels :
 
-1- Clone the repository locally using git ( or download the latest release [here](https://github.com/colxi/css-global-variables/archive/master.zip) )
+- GIT : Clone the repository locally using git ( or download the latest release [here](https://github.com/colxi/css-global-variables/releases/latest) )
  ```html
  $ git clone https://github.com/colxi/css-global-variables.git
 ```
 
-2- Install it using npm and import it. (unsafe! Not available in all browsers)
+- NPM : Install it using npm and import it. 
  ```bash
 $ npm install css-global-variables -s
 ```
 
 
-
 # Usage
-The Constructor returns a Proxy Object. Any regular Object operation can be performed on it. It couldn't be easier. We are going to focus here, only in the most useful and interesting ones : **construction, enumeration , set , get**
+The Constructor returns a Proxy Object. Any regular Object operation can be performed on it (except property deletion). In the following list, you will find examples of the the most common operations and interactions  : 
 
-**Importing** the library
+**Import and Construct** :
 ```javascript
 import {CSSGlobalVariables} from './css-global-variables.js';
-```
-
-**Construction** returns the live Object:
-```javascript
 let cssVar = new CSSGlobalVariables();
-```
-
-**Enumeration** of all declared CSS3 global variables, through iteration :
-```javascript
-for(let v in cssVar){
-    if ( cssVar.hasOwnProperty(v) ) console.log(v);
-}
 ```
 
 **Set** a new value to a CSS3 Global variabe :
@@ -84,10 +77,20 @@ console.log( cssVar['myVariable'] );
 console.log( cssVar['--myVariable'] );
 ```
 
+
+**Enumeration** of all declared CSS3 global variables, through iteration :
+```javascript
+for(let v in cssVar){
+    if ( cssVar.hasOwnProperty(v) ) console.log(v);
+}
+```
+
+> Note : Styles which source is affected by a **Cross Origin Policy Restriction** will be ignored, and not included in the CSS Global Variables live Object
+ 
+
 ---
 # DOM changes:
 
 The library uses a DOM Mutation Observer to detect new inclusion or removals in the document. Thanks to this observer, new CSS variables are available automatically, when new styles are attached to the document.  
 
 
- 
