@@ -17,7 +17,7 @@
 
     /**
      *  
-     * new CSSGlobalVariables() : Returns a Proxy containing all the  found CSS Global Variables. 
+     * new CSSGlobalVariables() : Returns a Proxy containing all the found CSS global variables. 
      *                            Accepts a Configuration Object, with the following properties:
      *     filter : [String],
      *     autoprefix     : [Boolean],
@@ -71,8 +71,8 @@
         /**
          *
          * varsCacheProxy (Proxy Object) : Public Proxy object containing the CSS
-         * variables and their values. Provides bindeºd methods for live getting and
-         * setting, the variables values.
+         * variables and their values. Provides bound methods for live getting and
+         * setting of the variables and values.
          *
          * @type {Proxy Object}
          *
@@ -91,7 +91,7 @@
                 value = String(value);
                 // set the variable value
                 document.documentElement.style.setProperty( name, value );
-                // update th cache object
+                // update the cache object
                 return Reflect.set(target, name, value);
             },
             deleteProperty: function () {
@@ -145,7 +145,7 @@
             // if normalize was provided execute it
             if( __config__.normalize ) name = __config__.normalize( name );
 
-            // If CSSVar name does not start with '--', prefix it, when __config__.autoprefix=true,
+            // If CSS variable name does not start with '--', prefix it, when __config__.autoprefix=true,
             // or trigger an Error when not.
             if( name.substring(0,2) !=='--' ){
                 if(__config__.autoprefix ) name = '--' + name;
@@ -161,14 +161,14 @@
          * updateVarsCache() : Updates the variables and values cache object. Inspects
          * STYLE elements and attached stylesheets, ignoring those that have been
          * previously checked. Finally checks the inline CSS variables declarations.
-         * Analized Elements will be Flagged wth an Htmlmattribute
+         * Analyzed Elements will be Flagged with an Html attribute
          *
          * @return {[boolean]} Returns true
          *
          */
         function updateVarsCache(){
 
-            // iterate all document styleSheets
+            // iterate all document stylesheets
             Array.from( document.styleSheets ).forEach( _styleSheet=>{
                 // if element has the ignore directive, ignore it and continue
                 if( _styleSheet.ownerNode.getAttribute('css-global-vars-ignore') ) return;
@@ -180,8 +180,8 @@
                     let isMember = false;
                     // iterate all selector resulting collection 
                     for( let i in Object.keys(elements) ){
-                        // if current element matches the current stylesheet, set 
-                        // flag to true and finish iteration
+                        // if current element matches the current stylesheet, 
+                        // set flag to true and finish iteration
                         if( elements[i] === _styleSheet.ownerNode ){
                             isMember = true;
                             break;
@@ -205,16 +205,16 @@
                 }
                 if(abort) return; 
 
-                // if Style element has been previously analized ignore it, if
-                // not mark element as analized to prevent future analysis
+                // if Style element has been previously analyzed ignore it;
+                // if not, mark element as analyzed to prevent future analysis
                 let  ids = _styleSheet.ownerNode.getAttribute('css-global-vars-id');
 
                 if( String(ids).split(',').includes( String(__config__.id) ) ) return;
                 else{
                     // not cached yet!
                     let value = _styleSheet.ownerNode.getAttribute('css-global-vars-id');
-                    // check if is null or empty (crossbrowser solution), and
-                    // attach the new instance id
+                    // check if is null or empty (crossbrowser solution),
+                    // and attach the new instance id
                     if( value === null || value === '' ) value = __config__.id;
                     else value += ',' + __config__.id;
                     // set the new value to the object
@@ -230,7 +230,7 @@
                         // iterate each :root CSS property
                         for (let i = 0; i < css.length; i++) {
                             let prop = css[i].split(':');
-                            // if is a varIABLE property, insert in in cache
+                            // if is a CSS variable property, insert in the cache
                             if (prop.length === 2 && prop[0].indexOf('--') === 1){
                                 __varsCache__[ prop[0].trim() ] = prop[1].trim();
                             }
@@ -240,7 +240,7 @@
             } );
             // After collecting all the variables definitions, check their computed
             // values, consulting the :root element inline style definitions,
-            // and and assigning those values to the variables, in cache
+            // and assigning those values to the variables, in cache
             for( let p in __varsCache__){
                 if( __varsCache__.hasOwnProperty(p) ){
                     __varsCache__[p] = window.getComputedStyle(document.documentElement,null).getPropertyValue(p).trim();
@@ -252,7 +252,7 @@
 
 
         // Create a mutation observer. When new styles are attached to the DOM (Style or Link element) 
-        // will pperform an update of the document CSS variables
+        // will perform an update of the document CSS variables
         var observer = new MutationObserver( mutations=>{
             let update = false;
             mutations.forEach( mutation=>{
@@ -266,7 +266,7 @@
                 }
             });    
             if(update){ 
-                // update needs to be scheduled to garanted that the new styles
+                // update needs to be scheduled to guarantee that the new styles
                 // are visible through the document.styleSheets API
                 setTimeout( updateVarsCache, 500 );
             }
@@ -279,8 +279,8 @@
             subtree: true
         });
 
-        // analize the document style elements to generate
-        // the collection of css variables, and return the proxy object
+        // analyze the document style elements to generate
+        // the collection of CSS variables, and return the proxy object
         updateVarsCache();
         return varsCacheProxy;
     };
