@@ -10,7 +10,7 @@ import {CSSGlobalVariables} from './css-global-variables.js';
 
 // set the CSS global --myColor value to "green"
 let cssVar = new CSSGlobalVariables();
-cssVar.myVariableName = "green";
+cssVar.myColor = "green";
 ```
 Demo : See it in action [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
 
@@ -89,7 +89,7 @@ for( let v in cssVar ){
 }
 ```
 
-# Normalize functions
+# Variable Name Normalize functions
 `Normalize functions` (implemented by [@SebastianDuval](https://github.com/SebastianDuval) ) allow you to perform automatic transformations in the variable names, to make them more suitable for the javascript syntax, or to simply addapt them to your coding style and personal preferences.
 
 In the following example a CSS variable declared using hyphens (`--my-css-variable`), can be accessed in Javascript using the widelly used camelCase style (`myCssVariable`), thanks to the `camelToHyphens` normalize function (and the native `autoprefixer`) :
@@ -119,7 +119,7 @@ cssVar.myCssVariable = 'blue';
 The library uses a DOM Mutation Observer to detect new inclusion in the document. Thanks to this observer, new CSS variables are available automatically, when new styles are attached to the document.  
 
 
-# CORS
+# CORS Restrictions
 CSSGlovalVariables will face limitations when trying to extract the CSS definitions of a remote stylesheet (except for same-origin urls). Restrictions applied by the browser, based in the Cross Origin Policy will block any access attempt. 
 
 In such scenario, a warning will be printed in console, and the affected style element will be flagged and ignored by the library.
