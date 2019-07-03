@@ -1,18 +1,19 @@
 ![](https://img.shields.io/badge/Javascript-ES6-orange.svg)
-![](https://img.shields.io/badge/markup-CSS3-blue.svg)
+![](https://img.shields.io/badge/CSS-Custom_Properties-blue.svg)
 
 # CSS Variables Manipulation with JS (ES6)
 
-CSSGlobalVariables provides a natural interface for fast manipulation of **GLOBAL  [CSS variables](https://www.w3.org/TR/css-variables-1/)** (those declared with a `:root` selector), simplifying templating tasks, and manipulation of general CSS styles in javascript.
+CSSGlobalVariables provides a natural interface for fast manipulation of **GLOBAL [CSS Variables/Custom Properties](https://www.w3.org/TR/css-variables-1/)** (those declared with a `:root` selector), simplifying templating tasks, and manipulation of general CSS styles in javascript.
 
 ```javascript
 import {CSSGlobalVariables} from './css-global-variables.js';
 
-// set the CSS global --myColor value to "green"
+// set the CSS global variable --myColor value to "green"
 let cssVar = new CSSGlobalVariables();
 cssVar.myColor = "green";
 ```
-Demo: See it in action [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
+Demo: [See it in action](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
+
 
 # Syntax
 
@@ -20,21 +21,19 @@ Demo: See it in action [here](https://colxi.github.io/css-global-variables/examp
  new CSSGlobalVariables( [ configObject ] )
 ```
 
-#### Parameters
+## Parameters
 A Config Object can be provided to customize internal behaviour. It can set any of the following properties:
 
 * **`autoprefix`**:
 When set to `true` allows access to the CSS variables names without specifing the `--` prefix on the name. (Boolean. Default:`true`)
 
 * **`filter`**:
-Allows to filter which Style Elements should be scanned (and which ignnored), through CSS selector strings. By default everything is scanned. (String. Default: `'*'`)
+Allows to filter which Style Elements should be scanned or ignored through CSS selector strings. By default everything is scanned. (String. Default: `'*'`)
 
 * **`normalize`**:
-A user-provided transform-function that processes the CSS Variable names (before they get autoPrefixed). The function must return a String. This mechanism allows the usage of custom variable name formatting (eg. camelCase, snake_case, CONSTANT_CASE) in your code. A nice source of transform functions is [change-case](https://www.npmjs.com/package/change-case). (Function. Default: `none`)
+A user-provided transform-function that processes the CSS variable names (before they get autoPrefixed). The function must return a String. This mechanism allows the usage of custom variable name formatting (eg. camelCase, snake_case, CONSTANT_CASE) in your code. (A nice source of transform functions is [change-case](https://www.npmjs.com/package/change-case)). (Function. Default: `none`)
 
-
-
-#### Return value
+## Return Value
 The CSSGlobalVariables() Constructor returns a `Proxy Object` containing a **live Collection** with the found CSS global variables.
 
 
@@ -56,6 +55,7 @@ $ npm install css-global-variables -s
 <script src="https://colxi.info/css-global-variables/src/main.js"></script>
 ```
 
+
 # Usage
 The `Constructor` returns a `Proxy Object` and any regular Object operation can be performed on it (except property deletion). In the following list, you will find examples of the the most common operations and interactions: 
 
@@ -65,7 +65,7 @@ import {CSSGlobalVariables} from './css-global-variables.js';
 let cssVar = new CSSGlobalVariables();
 ```
 
-**Set** a new value to a CSS Global variable:
+**Set** a new value to a CSS global variable:
 ```javascript
 /* The following assigments to '--myVariable' behave equally, and are all valid */
 cssVar.myVariable = 'newValue';
@@ -73,14 +73,13 @@ cssVar['myVariable'] = 'newValue';
 cssVar['--myVariable'] = 'newValue';
 ```
 
-**Get** the value of a CSS Global variable:
+**Get** the value of a CSS global variable:
 ```javascript
 /* The following value retrievals for '--myVariable' behave equally, and are all valid */
 console.log( cssVar.myVariable );
 console.log( cssVar['myVariable'] );
 console.log( cssVar['--myVariable'] );
 ```
-
 
 **Enumeration** of all declared CSS global variables, through iteration:
 ```javascript
@@ -89,7 +88,8 @@ for( let v in cssVar ){
 }
 ```
 
-# Variable Name Normalize functions
+
+# Variable Name Normalization
 `Normalize functions` (implemented by [@SebastianDuval](https://github.com/SebastianDuval) ) allow you to perform automatic transformations of the variable names, to make them more suitable for the javascript syntax, or to simply addapt them to your coding style and personal preferences.
 
 In the following example a CSS variable declared using hyphens (`--my-css-variable`), can be accessed in Javascript using the widelly used camelCase style (`myCssVariable`), thanks to the `camelToHyphens` normalize function (and the native `autoprefixer`):
@@ -113,8 +113,7 @@ cssVar.myCssVariable = 'blue';
 ```
 
 
-
-# DOM changes tracking
+# Automatic DOM Change Tracking
 
 The library uses a DOM Mutation Observer to detect new inclusion in the document. Thanks to this observer, new CSS variables are available automatically when new styles are attached to the document.  
 
