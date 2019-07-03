@@ -14,13 +14,13 @@ cssVar.myColor = "green";
 ```
 Demo: See it in action [here](https://colxi.github.io/css-global-variables/examples/demo-simple.html)
 
-# Syntax:
+# Syntax
 
 ```javascript
  new CSSGlobalVariables( [ configObject ] )
 ```
 
-#### Parameters:
+#### Parameters
 A Config Object can be provided to customize internal behaviour. It can set any of the following properties:
 
 * **`autoprefix`**:
@@ -34,11 +34,11 @@ A user-provided transform-function that processes the CSS Variable names (before
 
 
 
-#### Return value:
+#### Return value
 The CSSGlobalVariables() Constructor returns a `Proxy Object` containing a **live Collection** with the found CSS global variables.
 
 
-# Installation:
+# Installation
 You can choose between any of the following available distribution channels:
 
 - **GIT**: Clone the repository locally using git (or download the latest release [here](https://github.com/colxi/css-global-variables/releases/latest))
@@ -114,7 +114,7 @@ cssVar.myCssVariable = 'blue';
 
 
 
-# DOM changes tracking:
+# DOM changes tracking
 
 The library uses a DOM Mutation Observer to detect new inclusion in the document. Thanks to this observer, new CSS variables are available automatically when new styles are attached to the document.  
 
