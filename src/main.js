@@ -5,9 +5,9 @@
 * @Author: colxi
 * @Email: colxi.kl@gmail.com
 * @Date:  2018-03-18
+* @License: MIT
 *
 */
-
 
 (function(){
     'use strict';
